@@ -15,7 +15,7 @@ export const getWeatherData = async (req, res) => {
   try {
     // Fetch location data (latitude and longitude) for the specified city
     const locationResponse = await axios.get(
-      `${BASE_URL}/weather?q=${cityName}&appid=${apiKey}`
+      `${BASE_URL}/weather?q=${cityName}&appid=${apiKey}&units=metric`
     );
 
     // Extract latitude and longitude from the location response
@@ -23,12 +23,12 @@ export const getWeatherData = async (req, res) => {
 
     // Fetch current weather data for the specified coordinates (latitude and longitude)
     const currentWeatherResponse = await axios.get(
-      `${BASE_URL}/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`
+      `${BASE_URL}/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`
     );
 
     // Fetch 5-day weather forecast data for the specified coordinates
     const forecastResponse = await axios.get(
-      `${BASE_URL}/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`
+      `${BASE_URL}/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`
     );
 
     const weatherData = {
