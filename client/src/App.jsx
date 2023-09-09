@@ -4,7 +4,8 @@ import Home from './components/Home/Home';
 
 const App = () => {
   return (
-    <Home />
+    // Render the Home component
+    <Home /> 
   );
 };
 
