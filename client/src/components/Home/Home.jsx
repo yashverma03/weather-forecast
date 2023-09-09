@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FormControl, Button, Form } from 'react-bootstrap';
+import { FormControl, Button, Form, Dropdown } from 'react-bootstrap';
 import styles from './Home.module.css';
 import API_URL from '../../config/api';
 import axios from 'axios';
@@ -56,6 +56,7 @@ const Home = () => {
   const [cityName, setCityName] = useState('');
   // const [weatherData, setWeatherData] = useState(null);
   const [weatherData, setWeatherData] = useState(sampleData);
+  const [temperatureUnit, setTemperatureUnit] = useState('celsius');
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
@@ -72,11 +73,13 @@ const Home = () => {
     }
   };
 
+  const handleUnitChange = (newUnit) => {
+    setTemperatureUnit(newUnit);
+  };
+
   return (
     <div>
-      <h2 className={styles.heading}>
-        WEATHER DATA
-      </h2>
+      <h2 className={styles.heading}>WEATHER DATA</h2>
 
       <div className={styles.formContainer}>
         <Form className={styles.form} onSubmit={handleOnSubmit}>
@@ -85,7 +88,18 @@ const Home = () => {
             placeholder='Enter City name ...'
             value={cityName}
             onChange={(e) => setCityName(e.target.value)}
-          />
+          />          
+
+          <Dropdown className={styles.dropdown}>
+            <Dropdown.Toggle variant='secondary' id='dropdown-basic'>
+              {temperatureUnit === 'celsius' ? 'Celsius' : 'Fahrenheit'}
+            </Dropdown.Toggle>
+
+            <Dropdown.Menu>
+              <Dropdown.Item onClick={() => handleUnitChange('celsius')}>Celsius</Dropdown.Item>
+              <Dropdown.Item onClick={() => handleUnitChange('fahrenheit')}>Fahrenheit</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
 
           <Button className={styles.button} variant='primary' type='submit'>
             Get Weather
@@ -95,8 +109,8 @@ const Home = () => {
 
       {weatherData && (
         <div className={styles.weatherData}>
-          <WeatherCondition data={weatherData.currentWeather} />
-          <WeatherForecast data={weatherData.forecastData} />
+          <WeatherCondition data={weatherData.currentWeather} temperatureUnit={temperatureUnit} />
+          <WeatherForecast data={weatherData.forecastData} temperatureUnit={temperatureUnit} />
         </div>
       )}
     </div>
