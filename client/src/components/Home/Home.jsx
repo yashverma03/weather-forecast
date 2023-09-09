@@ -6,56 +6,9 @@ import axios from 'axios';
 import WeatherCondition from '../WeatherCondition/WeatherCondition';
 import WeatherForecast from '../WeatherForecast/WeatherForecast';
 
-const sampleData = {
-  currentWeather: { main: { temp: 30, humidity: 50 }, weather: [{ description: 'Clear sky' }] },
-  forecastData: {
-    list: [
-      { dt_txt: '2023-09-12 12:00:00', main: { temp: 28 }, weather: [{ description: 'Clear sky' }] },
-      { dt_txt: '2023-09-13 12:00:00', main: { temp: 29 }, weather: [{ description: 'Partly cloudy' }] },
-      { dt_txt: '2023-09-14 12:00:00', main: { temp: 27 }, weather: [{ description: 'Scattered clouds' }] },
-      { dt_txt: '2023-09-15 12:00:00', main: { temp: 26 }, weather: [{ description: 'Rainy' }] },
-      { dt_txt: '2023-09-16 12:00:00', main: { temp: 25 }, weather: [{ description: 'Cloudy' }] },
-      { dt_txt: '2023-09-17 12:00:00', main: { temp: 29 }, weather: [{ description: 'Clear sky' }] },
-      { dt_txt: '2023-09-18 12:00:00', main: { temp: 30 }, weather: [{ description: 'Clear sky' }] },
-      { dt_txt: '2023-09-19 12:00:00', main: { temp: 28 }, weather: [{ description: 'Partly cloudy' }] },
-      { dt_txt: '2023-09-20 12:00:00', main: { temp: 27 }, weather: [{ description: 'Scattered clouds' }] },
-      { dt_txt: '2023-09-21 12:00:00', main: { temp: 26 }, weather: [{ description: 'Rainy' }] },
-      { dt_txt: '2023-09-22 12:00:00', main: { temp: 25 }, weather: [{ description: 'Cloudy' }] },
-      { dt_txt: '2023-09-23 12:00:00', main: { temp: 29 }, weather: [{ description: 'Clear sky' }] },
-      { dt_txt: '2023-09-24 12:00:00', main: { temp: 30 }, weather: [{ description: 'Clear sky' }] },
-      { dt_txt: '2023-09-25 12:00:00', main: { temp: 28 }, weather: [{ description: 'Partly cloudy' }] },
-      { dt_txt: '2023-09-26 12:00:00', main: { temp: 27 }, weather: [{ description: 'Scattered clouds' }] },
-      { dt_txt: '2023-09-27 12:00:00', main: { temp: 26 }, weather: [{ description: 'Rainy' }] },
-      { dt_txt: '2023-09-28 12:00:00', main: { temp: 25 }, weather: [{ description: 'Cloudy' }] },
-      { dt_txt: '2023-09-29 12:00:00', main: { temp: 30 }, weather: [{ description: 'Clear sky' }] },
-      { dt_txt: '2023-09-30 12:00:00', main: { temp: 31 }, weather: [{ description: 'Clear sky' }] },
-      { dt_txt: '2023-09-12 12:00:00', main: { temp: 28 }, weather: [{ description: 'Clear sky' }] },
-      { dt_txt: '2023-09-13 12:00:00', main: { temp: 29 }, weather: [{ description: 'Partly cloudy' }] },
-      { dt_txt: '2023-09-14 12:00:00', main: { temp: 27 }, weather: [{ description: 'Scattered clouds' }] },
-      { dt_txt: '2023-09-15 12:00:00', main: { temp: 26 }, weather: [{ description: 'Rainy' }] },
-      { dt_txt: '2023-09-16 12:00:00', main: { temp: 25 }, weather: [{ description: 'Cloudy' }] },
-      { dt_txt: '2023-09-17 12:00:00', main: { temp: 29 }, weather: [{ description: 'Clear sky' }] },
-      { dt_txt: '2023-09-18 12:00:00', main: { temp: 30 }, weather: [{ description: 'Clear sky' }] },
-      { dt_txt: '2023-09-19 12:00:00', main: { temp: 28 }, weather: [{ description: 'Partly cloudy' }] },
-      { dt_txt: '2023-09-20 12:00:00', main: { temp: 27 }, weather: [{ description: 'Scattered clouds' }] },
-      { dt_txt: '2023-09-21 12:00:00', main: { temp: 26 }, weather: [{ description: 'Rainy' }] },
-      { dt_txt: '2023-09-22 12:00:00', main: { temp: 25 }, weather: [{ description: 'Cloudy' }] },
-      { dt_txt: '2023-09-23 12:00:00', main: { temp: 29 }, weather: [{ description: 'Clear sky' }] },
-      { dt_txt: '2023-09-24 12:00:00', main: { temp: 30 }, weather: [{ description: 'Clear sky' }] },
-      { dt_txt: '2023-09-25 12:00:00', main: { temp: 28 }, weather: [{ description: 'Partly cloudy' }] },
-      { dt_txt: '2023-09-26 12:00:00', main: { temp: 27 }, weather: [{ description: 'Scattered clouds' }] },
-      { dt_txt: '2023-09-27 12:00:00', main: { temp: 26 }, weather: [{ description: 'Rainy' }] },
-      { dt_txt: '2023-09-28 12:00:00', main: { temp: 25 }, weather: [{ description: 'Cloudy' }] },
-      { dt_txt: '2023-09-29 12:00:00', main: { temp: 30 }, weather: [{ description: 'Clear sky' }] },
-      { dt_txt: '2023-09-30 12:00:00', main: { temp: 31 }, weather: [{ description: 'Clear sky' }] },
-    ],
-  },
-};
-
 const Home = () => {
   const [cityName, setCityName] = useState('');
-  // const [weatherData, setWeatherData] = useState(null);
-  const [weatherData, setWeatherData] = useState(sampleData);
+  const [weatherData, setWeatherData] = useState(null);
   const [temperatureUnit, setTemperatureUnit] = useState('celsius');
 
   const handleOnSubmit = async (e) => {
