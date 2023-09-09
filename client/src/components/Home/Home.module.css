@@ -1,3 +1,12 @@
+.heading {
+  text-align: center;
+  margin: 40px;
+  color: rgb(5, 172, 5);
+  font-family: 'Pacifico', cursive;
+  font-size: 26px;
+  font-weight: bold;
+}
+
 .formContainer {
   margin: 20px;
 }
@@ -21,4 +30,8 @@
   margin: 10px;
   width: 140px;
   min-width: 140px;
+}
+
+.weatherData {
+  margin: 60px 30px;
 }
