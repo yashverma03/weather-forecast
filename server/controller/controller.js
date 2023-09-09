@@ -1,33 +1,33 @@
 import axios from 'axios';
+import cache from '../middleware/cacheMiddleware.js';
 
 export const getWeatherData = async (req, res) => {
   const { cityName } = req.query;
 
-  const API_KEY = process.env.API_KEY;
+  const apiKey = process.env.API_KEY;
   const BASE_URL = 'https://api.openweathermap.org/data/2.5';
 
   try {
-    // Fetch lat and lon for the city
     const locationResponse = await axios.get(
-      `${BASE_URL}/weather?q=${cityName}&appid=${API_KEY}`
+      `${BASE_URL}/weather?q=${cityName}&appid=${apiKey}`
     );
 
     const { lat, lon } = locationResponse.data.coord;
 
-    // Fetch current weather data
     const currentWeatherResponse = await axios.get(
-      `${BASE_URL}/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}`
+      `${BASE_URL}/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`
     );
 
-    // Fetch 5-day weather forecast
     const forecastResponse = await axios.get(
-      `${BASE_URL}/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}`
+      `${BASE_URL}/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`
     );
 
     const weatherData = {
       currentWeather: currentWeatherResponse.data,
       forecastData: forecastResponse.data,
     };
+
+    cache.set(`weatherData:${cityName}`, weatherData);
 
     res.status(200).json(weatherData);
   } catch (error) {
