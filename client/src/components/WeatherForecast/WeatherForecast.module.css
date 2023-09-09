@@ -61,3 +61,10 @@
   flex-basis: 40%;
   text-align: center;
 }
+
+.averageTemp {
+  margin: 40px 0 20px 0;
+  font-weight: bold;
+  color: rgb(83, 83, 83);
+  text-align: center;
+}

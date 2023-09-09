@@ -36,6 +36,11 @@ const WeatherForecast = ({ data }) => {
 
   const { list } = data;
 
+  const selectedForecasts = list.filter((forecast, index) => index % 8 === 0);
+
+  const totalTemp = selectedForecasts.reduce((sum, forecast) => sum + forecast.main.temp, 0);
+  const averageTemp = totalTemp / selectedForecasts.length;
+
   return (
     <div className={styles.container}>
       <h2 className={styles.heading}>5-Day Weather Forecast</h2>
@@ -47,7 +52,7 @@ const WeatherForecast = ({ data }) => {
       </div>
 
       <ul className={styles.listContainer}>
-        {list.filter((forecast, index) => index % 8 === 0).map((forecast, index) => (
+        {selectedForecasts.map((forecast, index) => (
           <li className={styles.list} key={index}>
             <p className={styles.text}>{forecast.dt_txt.split(' ')[0]}</p>
             <p className={styles.text}>{forecast.main.temp}° C</p>
@@ -55,6 +60,10 @@ const WeatherForecast = ({ data }) => {
           </li>
         ))}
       </ul>
+
+      <p className={styles.averageTemp}>
+        Average Temperature: {averageTemp.toFixed(2)}° C
+      </p>
     </div>
   );
 };
